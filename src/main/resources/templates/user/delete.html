@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<title>削除</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+	</head>
+	<body>
+		<main>
+			<h1>削除</h1>
+			<br />
+			<div th:if="${error!=Null}">
+				<p class="error" th:text="${error}">入力データにエラーがあります。</p>
+			</div>
+			<div th:unless="${error != Null}">
+				<form action="/user/delete" method="post" th:action="@{/user/delete}" th:object="${userForm}">
+					<input type="hidden" name="id" th:value="*{id}">
+					<table>
+						<tr>
+							<td>ユーザーId　：</td>
+							<td th:text="*{userId}">shk23001</td>
+						</tr>
+						<tr>
+							<td>ユーザー名　：</td>
+							<td th:text="*{username}">厚木太郎</td>
+						</tr>
+						<tr>
+							<td>役割　：</td>
+							<td th:if="*{role.equals('GENERAL')}" th:text="一般"></td>
+							<td th:if="*{role.equals('ADMIN')}" th:text="管理者"></td>
+						</tr>
+					</table>
+					<br />
+					<input type="submit" value="削除">
+				</form>
+			</div>
+			<br />
+			<br />
+			<div>
+				<a href="/user">ユーザー管理へ</a>
+			</div>
+		</main>
+	</body>
+</html>

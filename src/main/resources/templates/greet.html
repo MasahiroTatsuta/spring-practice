@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <title>世界の挨拶</title>
+    </head>
+    <body>
+        <h1>世界の挨拶</h1>
+        
+		<form action="/greet" th:action="@{/greet}" method="post">
+			<p>言語<br>
+			<select id="language" name="language">
+				<option th:each="option : ${languageOption}" th:value="${option}" th:selected="${option == language}" th:inline="text">[[${option}]]</option>
+			</select>
+			</p>
+			<p>時間帯<br>
+			<select name="timeframe" size="4">
+				<option value="morning" th:selected="${timeframe == 'morning'}">朝</option>
+				<option value="noon" th:selected="${timeframe == 'noon'}">昼</option>
+				<option value="evening"th:selected="${timeframe == 'evening'}">夕方</option>
+				<option value="night" th:selected="${timeframe == 'night'}">夜</option>
+			</select>
+			</p>
+			<input type="submit" value="挨拶" />
+		</form>
+		<br />
+		<div th:if="${message != null}">		
+			<div th:switch="${timeframe}">
+				<span th:case="morning">朝</span>
+				<span th:case="noon">昼</span>				
+				<span th:case="evening">夕方</span>
+				<span th:case="night">夜</span>
+			</div>
+			<span>の挨拶：</span>
+			<span th:text="${message}"></span>
+			<br />
+		</div>
+		<h5>
+			<a href="index.html" th:href="@{/}">トップページへ</a>
+		</h5>
+    </body>
+</html>

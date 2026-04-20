@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<title>ユーザー管理</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+	</head>
+	<body>
+		<main>
+			<h1>ユーザー管理</h1>
+			<br />
+			<div th:if="${error!=Null}">
+				<p class="error" th:text="${error}">エラーメッセージ</p>
+				<br />
+			</div>
+			<a href="" th:href="@{/user/create}">新規登録</a>
+			<br />
+			<br />
+			<table class="counter">
+				<thead>
+					<tr>
+						<th>No.</th>
+						<th>ユーザーId</th>
+						<th>ユーザー名</th>
+						<th>役割</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${!#lists.isEmpty(users)}" th:each="user:${users}">
+						<td></td>
+						<td th:text="${user.userId}"></td>
+						<td th:text="${user.username}"></td>
+						<td th:if="${user.role.equals('GENERAL')}" th:text="一般"></td>
+						<td th:if="${user.role.equals('ADMIN')}" th:text="管理者"></td>
+						<td><a href="/user/edit?id=1" th:href="@{/user/edit(id=${user.id})}">編集</a></td>
+						<td><a href="/user/delete?id=1" th:href="@{/user/delete(id=${user.id})}">削除</a></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<br />
+			<div>
+				<a href="/">トップページへ</a>
+			</div>
+		</main>
+	</body>
+</html>

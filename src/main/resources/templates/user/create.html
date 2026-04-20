@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<title>新規登録</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+	</head>
+	<body>
+		<main>
+			<h1>新規登録</h1>
+			<br />
+			<div th:if="${error!=null}">
+				<p class="error" th:text="${error}">入力データにエラーがあります。</p>
+			</div>
+			<form action="/user/create" method="post" th:action="@{/user/create}" th:object="${userForm}">
+				<table>
+					<tr>
+						<td>ユーザーId　：</td>
+						<td>
+							<input type="text" id="userId" name="userId" th:field="*{userId}">
+						</td>
+						<td th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" style="color: red;"></td>
+					</tr>
+					<tr>
+						<td>ユーザー名　：</td>
+						<td>
+							<input type="text" id="username" name="username" th:field="*{username}">
+						</td>
+						<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color: red;"></td>
+					</tr>
+					<tr>
+						<td>役割　：</td>
+						<td>
+							<select name="role">
+								<option value="GENERAL" th:selected="*{role=='GENERAL'}">一般</option>
+								<option value="ADMIN" th:selected="*{role=='ADMIN'}">管理者</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>パスワード　：</td>
+						<td>
+							<input type="text" id="password" name="password">
+						</td>
+						<td class="input_error" th:if="${passwordError!=null}" th:text="${passwordError}"></td>
+					</tr>
+				</table>
+				<br />
+				<input type="submit" value="登録">
+			</form>
+			<br />
+			<br />
+			<div>
+				<a href="/user">ユーザー管理へ</a>
+			</div>
+		</main>
+	</body>
+</html>

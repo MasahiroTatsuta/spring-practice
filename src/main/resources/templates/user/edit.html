@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<title>編集</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+	</head>
+	<body>
+		<main>
+			<h1>編集</h1>
+			<br />
+			<div th:if="${error!=Null}">
+				<p class="error" th:text="${error}">入力データにエラーがあります。</p>
+			</div>
+			<form action="/user/edit" method="post" th:action="@{/user/edit}" th:object="${userForm}">
+				<input type="hidden" name="id" th:value="*{id}">
+				<input type="hidden" name="userId" th:value="*{userId}">
+				<table>
+					<tr>
+						<td>ユーザーId　：</td>
+						<td th:text="*{userId}">shk23001</td>
+					</tr>
+					<tr>
+						<td>ユーザー名　：</td>
+						<td>
+							<input type="text" id="username" name="username" th:value="*{username}">
+						</td>
+					</tr>
+					<tr>
+						<td>役割　：</td>
+						<td>
+							<select name="role">
+								<option value="GENERAL" th:selected="*{role=='GENERAL'}">一般</option>
+								<option value="ADMIN" th:selected="*{role=='ADMIN'}">管理者</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>パスワード　：</td>
+						<td>
+							<input type="text" id="password" name="password">
+						</td>
+						<td class="input_error" th:if="${passwordError!=null}" th:text="${passwordError}"></td>
+					</tr>
+				</table>
+				<br />
+				<input type="submit" value="編集">
+			</form>
+			<br />
+			<br />
+			<div>
+				<a href="/user">ユーザー管理へ</a>
+			</div>
+		</main>
+	</body>
+</html>

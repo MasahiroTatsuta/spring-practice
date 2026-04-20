@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>挨拶登録結果</title>
+        <meta charset="UTF-8">
+		<link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+    </head>
+    <body>
+        <h1>挨拶の登録結果</h1>
+        <div th:if="${error != null}">
+			<h3 style="color:red"  th:text="${'エラー　：　' + error}"></h3>
+		</div>
+        <div th:object="${greetForm}">
+            <table border="1">
+                <tr>
+                    <td>言語</td>
+                    <td>
+                        <span th:text="*{language}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>朝</td>
+                    <td>
+                       <span th:text="*{morning}"></span>
+             　　　　</td>
+                </tr>
+                <tr>
+                    <td>昼</td>
+                    <td>
+                        <span th:text="*{noon}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>夕方</td>
+                    <td>
+                        <span th:text="*{evening}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>就寝</td>
+                    <td>
+                        <span th:text="*{night}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>備考</td>
+                    <td>
+                        <span th:text="*{remarks}"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br />
+        <h5>
+		<a href="/input" th:href="@{/input}">次の挨拶入力へ</a>
+	</h5>
+    </body>
+</html>
